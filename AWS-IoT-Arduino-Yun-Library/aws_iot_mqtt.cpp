@@ -38,10 +38,10 @@ IoT_Error_t aws_iot_mqtt_client::setup(char* client_id, bool clean_session, MQTT
 		while(!Serial1); // blocking until Serial1 is ready
 
 		exec_cmd("cd .\n", false, false); // placeholder: jump over the welcoming prompt for Open WRT
-		exec_cmd("cd /root\n", false, false);
+		exec_cmd("cd /opt/aws-iot\n", false, false);
 	    	exec_cmd("~\n", true, false); // exit the previous python process
 	    	delay(1000); // delay 1000 ms for all related python script to exit
-		exec_cmd("python aws_iot_mqtt_client.py\n", false, false);
+		exec_cmd("python bin/aws_iot_mqtt_client.py\n", false, false);
 
 		// Create obj
 		exec_cmd("i\n", false, false);
@@ -245,14 +245,14 @@ IoT_Error_t aws_iot_mqtt_client::yield() {
 			      		if(more == 0) { // This is the end of this message, do callback and clean up
 						    // user callback, watch out for ino_id boundary issue and callback registration
 						    if(ino_id >= 0 && ino_id < MAX_SUB && sub_group[ino_id].is_used && sub_group[ino_id].callback != NULL) {
-                                
+
 								if(rc == NONE_ERROR) {
 									sub_group[ino_id].callback(msg_buf, (int)strlen(msg_buf));
 								}
 								if(rc == OVERFLOW_ERROR) {
 									sub_group[ino_id].callback((char*)OUT_OF_BUFFER_ERR_MSG, (int)strlen(OUT_OF_BUFFER_ERR_MSG));
 								}
-                                
+
                                 if(sub_group[ino_id].ThingShadow != -1) {
                                     sub_group[ino_id].is_used = false;
                                     sub_group[ino_id].callback = NULL;
@@ -367,17 +367,17 @@ IoT_Error_t aws_iot_mqtt_client::shadow_get(char* thingName, message_callback cb
 			sub_group[j].is_used = true;
 			sub_group[j].callback = cb;
 		}
-	    
+
 		if(i < MAX_SUB && j < MAX_SUB) {
 	        sub_group[i].ThingShadow = j;
 	        sub_group[j].ThingShadow = i;
-	        
+
 			sprintf(rw_buf, "%d\n", i);
 			exec_cmd(rw_buf, false, false);
 
 			sprintf(rw_buf, "%d\n", j);
 			exec_cmd(rw_buf, true, false);
-	        
+
 			if(strcmp(rw_buf, "SG T") != 0) {rc = SHADOW_GET_ERROR;}
 		}
 		else {rc = OUT_OF_SKETCH_SUBSCRIBE_MEMORY;}
@@ -430,7 +430,7 @@ IoT_Error_t aws_iot_mqtt_client::shadow_update(char* thingName, char* payload, i
 	        	sub_group[i].ThingShadow = j;
 	        	sub_group[j].ThingShadow = i;
 	        }
-	        
+
 			sprintf(rw_buf, "%d\n", i);
 			exec_cmd(rw_buf, false, false);
 
@@ -440,7 +440,7 @@ IoT_Error_t aws_iot_mqtt_client::shadow_update(char* thingName, char* payload, i
 			int simple = cb == NULL ? 1 : 0;
 			sprintf(rw_buf, "%d\n", simple);
 			exec_cmd(rw_buf, true, false);
-	        
+
 			if(strcmp(rw_buf, "SU T") != 0) {rc = SHADOW_UPDATE_ERROR;}
 		}
 		else {rc = OUT_OF_SKETCH_SUBSCRIBE_MEMORY;}
@@ -487,7 +487,7 @@ IoT_Error_t aws_iot_mqtt_client::shadow_delete(char* thingName, message_callback
 		if(i < MAX_SUB && j < MAX_SUB) {
 	        sub_group[i].ThingShadow = j;
 	        sub_group[j].ThingShadow = i;
-	        
+
 			sprintf(rw_buf, "%d\n", i);
 			exec_cmd(rw_buf, false, false);
 
