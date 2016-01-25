@@ -45,7 +45,7 @@ On python side, for feedback to Arduino:
 'SD' - shadowDelete
 *Incoming string starting with the corresponding lower case letter represents the corresponding requests
 '''
-# marco
+# macros
 ###################################
 MAX_CONN_TIME = 10
 EXIT_TIME_OUT = 25
