@@ -41,6 +41,7 @@ bool print_log(const char* src, int code) {
     Serial.println(code);
     ret = false;
   }
+  Serial.flush();
   return ret;
 }
 

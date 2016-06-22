@@ -1,3 +1,12 @@
+#2.1.2 (June 22th, 2016)
+Features:  
+
+N/A  
+
+Bugfixes.Improvements:  
+
+* Fixed issue in the examples related to serial1 communication latency flushing the serial port in the loggin function.
+
 #2.1.1 (May 23th, 2016)  
 Features:  
 
