@@ -1,3 +1,13 @@
+# [ARCHIVED] AWS IoT Arduino Yún SDK
+
+> This repository is archived and no longer maintained. The AWS IoT Arduino Yún SDK reached end of support on June 19, 2026. It no longer receives updates, including security updates, and the Arduino Yún hardware it was built for has been discontinued.
+>
+> The source remains available, read-only, for historical reference. We do not recommend it for new or existing projects.
+>
+> For current, supported ways to connect devices to AWS IoT, see the [AWS IoT Device SDKs](https://docs.aws.amazon.com/iot/latest/developerguide/iot-sdks.html).
+
+---
+
 <h1 align = "center">AWS IoT Arduino Yún SDK</h1>
 
 ## What is AWS IoT Arduino Yún SDK
