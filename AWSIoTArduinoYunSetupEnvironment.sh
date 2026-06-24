@@ -3,7 +3,7 @@
 
 # Args check
 if {$argc!= 3} {
-    send_user "usage: ./AWSIoTArduinoYunScp.sh <Board IP> <UserName> <Board Password>\n"
+    send_user "usage: ./AWSIoTArduinoYunSetupEnvironment.sh <Board IP> <UserName> <Board Password>\n"
     exit
 }
 
